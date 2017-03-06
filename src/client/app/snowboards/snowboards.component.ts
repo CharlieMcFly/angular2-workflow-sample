@@ -28,4 +28,14 @@ export class SnowboardsComponent implements OnInit {
         error => this.errorMessage = <any>error
       )
   }
+
+  removeSnowboard( id:number ){
+    this.snowService.delete(id)
+      .subscribe(
+        snows => this.snows = snows,
+        error => this.errorMessage = <any>error
+      );
+
+    console.log("Le snowboard " + id + " va être supprimé.");
+  }
 }

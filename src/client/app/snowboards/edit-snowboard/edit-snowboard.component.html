@@ -1,0 +1,9 @@
+<h3>Edit Snowboard</h3>
+<form (ngSubmit)="editSnowboard()">
+  <div class="form-group">
+    <br />
+    <input type="text" class="form-control" name="name" [(ngModel)]="snowboard.name" >
+    <button type="submit" class="btn btn-primary btn-block">Save</button>
+  </div>
+</form>
+

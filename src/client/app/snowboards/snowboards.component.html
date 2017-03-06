@@ -1,7 +1,17 @@
 
 <ul>
   <li *ngFor="let s of snows">
-    {{s.name}}
+    <div class="row">
+      <div class="col-md-4" >{{s.name}} </div>
+      <div class="col-md-4" >
+        <button (click)="removeSnowboard(s.id)"> Supprimer</button>
+      </div>
+      <div class="col-md-4" >
+        <button [routerLink]="['/edit-snowboard', s.id]" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Edit</button>
+      </div>
+    </div>
   </li>
 </ul>
+
+<button [routerLink]="['/add-snowboard']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">AJOUTER</button>
 

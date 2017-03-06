@@ -4,7 +4,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import {Snowboard} from "../../snowboards/snowboard";
+import { Snowboard } from '../../snowboards/snowboard';
 // import 'rxjs/add/operator/do';  // for debugging
 
 /**
@@ -15,14 +15,34 @@ export class SnowboardListService {
 
   constructor(private http: Http) {}
 
-  private snowboardsURL = "https://snowboards-a2.firebaseio.com/";
+  private snowboardsURL = "http://localhost:8080/snowboards";
 
   get(): Observable<Snowboard[]> {
-    const endPoint = "snowboards.json";
 
-    return this.http.get(this.snowboardsURL + endPoint)
+    return this.http.get(this.snowboardsURL)
       .map((res: Response) => res.json())
-      //              .do(data => console.log('server data:', data))  // debug
+      // .do(data => console.log('server data:', data))  // debug
+      .catch(this.handleError);
+  }
+
+  getById(id: number): Observable<Snowboard>{
+    return this.http.get(this.snowboardsURL +"/"+ id)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
+  post(body : Snowboard) : Observable<Snowboard> {
+    return this.http.post(this.snowboardsURL, body)
+      .map((res: Response) => res.json())
+      // .do(data => console.log('server data:', data))
+      .catch(this.handleError);
+
+  }
+
+  delete(id : number ) : Observable<Snowboard[]> {
+
+    return this.http.delete(this.snowboardsURL +"/"+ id)
+      .map((res: Response) => res.json())
       .catch(this.handleError);
   }
 
